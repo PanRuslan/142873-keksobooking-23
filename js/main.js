@@ -1,21 +1,23 @@
-const getRandomInteger = (min, max) => {
-  min = min >= 0 ? min : 0;
-  max = max >= 0 ? max : 0;
-  if (min === max) {
-    return min;
+const getRandomInteger = (number1, number2) => {
+  //number1 = number1 >= 0 ? number1 : 0;
+  //number2 = number2 >= 0 ? number2 : 0;
+  if (number1 === number2) {
+    return number1;
   }
-  return min < max ? Math.floor(Math.random() * (max - min) + min) : Math.floor(Math.random() * (min - max) + max);
+  const min = number1 < number2 ? number1 : number2;
+  const max = number1 > number2 ? number1 : number2;
+  return Math.floor(Math.random() * (max - min) + min);
 };
 
-const getRandomFloat = (min, max, numberOfSignes) => {
-  min = min >= 0 ? min : 0;
-  max = max >= 0 ? max : 0;
-  if (min === max) {
-    return min;
+const getRandomFloat = (number1, number2, numberOfSignes) => {
+  number1 = number1 >= 0 ? number1 : 0;
+  number2 = number2 >= 0 ? number2 : 0;
+  if (number1 === number2) {
+    return number1.toFixed(numberOfSignes);
   }
-  min *= numberOfSignes;
-  max *= numberOfSignes;
-  return min < max ? (Math.floor(Math.random() * (max - min) + min)) / numberOfSignes : (Math.floor(Math.random() * (min - max) + max)) / numberOfSignes;
+  const min = number1 < number2 ? number1 : number2;
+  const max = number1 > number2 ? number1 : number2;
+  return (Math.random() * (max - min) + min).toFixed(numberOfSignes);
 };
 
 getRandomInteger(1, 9);
