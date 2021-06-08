@@ -1,22 +1,16 @@
 const getRandomInteger = (number1, number2) => {
-  //number1 = number1 >= 0 ? number1 : 0;
-  //number2 = number2 >= 0 ? number2 : 0;
   if (number1 === number2) {
     return number1;
   }
-  const min = number1 < number2 ? number1 : number2;
-  const max = number1 > number2 ? number1 : number2;
+  const [min, max] = number1 <= number2 ? [number1, number2] : [number2, number1];
   return Math.floor(Math.random() * (max - min) + min);
 };
 
 const getRandomFloat = (number1, number2, numberOfSignes) => {
-  number1 = number1 >= 0 ? number1 : 0;
-  number2 = number2 >= 0 ? number2 : 0;
   if (number1 === number2) {
     return number1.toFixed(numberOfSignes);
   }
-  const min = number1 < number2 ? number1 : number2;
-  const max = number1 > number2 ? number1 : number2;
+  const [min, max] = number1 <= number2 ? [number1, number2] : [number2, number1];
   return (Math.random() * (max - min) + min).toFixed(numberOfSignes);
 };
 
