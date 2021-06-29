@@ -29,30 +29,38 @@ const getRandomArray = (array) => {
 const houseType = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const checkTime = ['12:00', '13:00', '14:00'];
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+const photos = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
+];
 const SIMILAR_AD_COUNT = 10;
 
-const ad = () => ({
-  author: {avatar : `img/avatars/user ${getRandomInteger(1, 10)}.png`},
+const latitudes = new Array(SIMILAR_AD_COUNT).fill(null).map(() => getRandomFloat(35.65000, 35.70000, 5));
+const longitudes = new Array(SIMILAR_AD_COUNT).fill(null).map(() => getRandomFloat(139.70000, 139.80000, 5));
+const types = new Array(SIMILAR_AD_COUNT).fill(null).map(() => houseType[getRandomInteger(0, houseType.length)]);
+
+const ad = (index) => ({
+  author: {avatar : `img/avatars/user${getRandomInteger(1, 10)}.png`},
   location: {
-    lat: getRandomFloat(35.65000, 35.70000, 5),
-    lng: getRandomFloat(139.70000, 139.80000, 5),
+    lat: latitudes[index],
+    lng: longitudes[index],
   },
   offer: {
     title: 'Another ad',
-    address: `${this.location.lat}, ${this.location.lng}`,
+    address: `${latitudes[index]}, ${longitudes[index]}`,
     price: getRandomInteger(1, 5000),
-    type: houseType[getRandomInteger(0, houseType.length)],
+    type: types[index],
     rooms: getRandomInteger(1, 50),
     guests: getRandomInteger(1, 200),
     checkin: checkTime[getRandomInteger(0, checkTime.length)],
     checkout: checkTime[getRandomInteger(0, checkTime.length)],
     features: getRandomArray(features),
-    description: `Yet another ${this.type} ad`,
+    description: `Yet another ${types[index]} ad`,
     photos: getRandomArray(photos),
   },
 });
 
-const ads = new Array(SIMILAR_AD_COUNT).fill(null).map(() => ad());
+const ads = new Array(SIMILAR_AD_COUNT).fill(null).map((element, index) => ad(index));
 // eslint-disable-next-line no-console
 console.log(ads);
