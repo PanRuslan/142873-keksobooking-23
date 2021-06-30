@@ -36,31 +36,32 @@ const photos = [
 ];
 const SIMILAR_AD_COUNT = 10;
 
-const latitudes = new Array(SIMILAR_AD_COUNT).fill(null).map(() => getRandomFloat(35.65000, 35.70000, 5));
-const longitudes = new Array(SIMILAR_AD_COUNT).fill(null).map(() => getRandomFloat(139.70000, 139.80000, 5));
-const types = new Array(SIMILAR_AD_COUNT).fill(null).map(() => houseType[getRandomInteger(0, houseType.length)]);
+const ad = () => {
+  const latitudes = getRandomFloat(35.65000, 35.70000, 5);
+  const longitudes = getRandomFloat(139.70000, 139.80000, 5);
+  const types = houseType[getRandomInteger(0, houseType.length)];
+  return {
+    author: {avatar : `img/avatars/user${getRandomInteger(1, 10)}.png`},
+    location: {
+      lat: latitudes,
+      lng: longitudes,
+    },
+    offer: {
+      title: 'Another ad',
+      address: `${latitudes}, ${longitudes}`,
+      price: getRandomInteger(1, 5000),
+      type: types,
+      rooms: getRandomInteger(1, 50),
+      guests: getRandomInteger(1, 200),
+      checkin: checkTime[getRandomInteger(0, checkTime.length)],
+      checkout: checkTime[getRandomInteger(0, checkTime.length)],
+      features: getRandomArray(features),
+      description: `Yet another ${types} ad`,
+      photos: getRandomArray(photos),
+    },
+  };
+};
 
-const ad = (index) => ({
-  author: {avatar : `img/avatars/user${getRandomInteger(1, 10)}.png`},
-  location: {
-    lat: latitudes[index],
-    lng: longitudes[index],
-  },
-  offer: {
-    title: 'Another ad',
-    address: `${latitudes[index]}, ${longitudes[index]}`,
-    price: getRandomInteger(1, 5000),
-    type: types[index],
-    rooms: getRandomInteger(1, 50),
-    guests: getRandomInteger(1, 200),
-    checkin: checkTime[getRandomInteger(0, checkTime.length)],
-    checkout: checkTime[getRandomInteger(0, checkTime.length)],
-    features: getRandomArray(features),
-    description: `Yet another ${types[index]} ad`,
-    photos: getRandomArray(photos),
-  },
-});
-
-const ads = new Array(SIMILAR_AD_COUNT).fill(null).map((element, index) => ad(index));
+const ads = new Array(SIMILAR_AD_COUNT).fill(null).map(() => ad());
 // eslint-disable-next-line no-console
 console.log(ads);
