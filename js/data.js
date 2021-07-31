@@ -13,8 +13,10 @@ const ad = () => {
   const latitudes = getRandomFloat(35.65000, 35.70000, 5);
   const longitudes = getRandomFloat(139.70000, 139.80000, 5);
   const types = houseType[getRandomInteger(0, houseType.length)];
+  let avatarNumber = getRandomInteger(1, 10);
+  avatarNumber = avatarNumber < 10 ? `0${avatarNumber}` : avatarNumber;
   return {
-    author: {avatar : `img/avatars/user${getRandomInteger(1, 10)}.png`},
+    author: {avatar : `img/avatars/user${avatarNumber}.png`},
     location: {
       lat: latitudes,
       lng: longitudes,

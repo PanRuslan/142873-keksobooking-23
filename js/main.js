@@ -1,4 +1,5 @@
 import {ad} from './data.js';
+import './popup.js';
 
 const SIMILAR_AD_COUNT = 10;
 
